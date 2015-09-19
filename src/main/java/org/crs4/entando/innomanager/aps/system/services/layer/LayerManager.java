@@ -96,6 +96,15 @@ public class LayerManager extends AbstractService implements ILayerManager {
         try {
             layer = this.getWorkLayerDAO().loadLayer(name.trim());
             if ( layer != null ) return null;
+            if ( name == null || name.length() > 10 ) 
+                 return null;
+            // regexp!
+            char ch;
+            for ( int i=0; i <name.length();i++){
+                ch = name.charAt(i);
+                if ( !( (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') ) )  
+                     return null;
+            }
             if ( name.equals("public") ) name = "_public_";
             layer = new WorkLayer();
             layer.setName(name.trim());
