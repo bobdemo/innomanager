@@ -102,8 +102,9 @@ public class LayerManager extends AbstractService implements ILayerManager {
             char ch;
             for ( int i=0; i <name.length();i++){
                 ch = name.charAt(i);
-                if ( !( (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') ) )  
-                     return null;
+                if ( (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') )  
+                    ;
+                else return null;
             }
             if ( name.equals("public") ) name = "_public_";
             layer = new WorkLayer();
