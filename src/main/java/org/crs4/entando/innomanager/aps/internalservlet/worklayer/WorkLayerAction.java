@@ -195,11 +195,21 @@ public class WorkLayerAction extends BaseAction {
                             return FAILURE;    
                         }
                         if ( getStrutAction().equals("editNew") ){
-                            if ( layer == null &&  _name.trim().length() > 0  ) {
-                                getLayerManager().createWorkLayer(_name,_descr,this.getCurrentUser().getUsername());
-                                if ( getLayerManager().getWorkLayer(_name) != null )
-                                    return SUCCESS;
-                                else return FAILURE;
+                            if ( layer == null ) {
+                                if ( _name.trim().length() > 0 && _name.trim().length() < 11 ) {
+                            	   char ch;
+            			   for ( int i=0; i < _name.length();i++){
+                		   ch = _name.charAt(i);
+                		   if ( !( (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') ) )  
+                     			this.addActionError("innomanager_WORK_LAYER_WRONG_NAME");
+                     			return FAILURE;
+                     		   }
+                                   getLayerManager().createWorkLayer(_name,_descr,this.getCurrentUser().getUsername());
+                                   if ( getLayerManager().getWorkLayer(_name) != null )
+                                       return SUCCESS;
+                                   else return FAILURE;
+                                } 
+                                else this.addActionError("innomanager_WORK_LAYER_WRONG_NAME");
                             } 
                             else this.addActionError("innomanager_WORK_LAYER_ALREADY_EXIST");
                         }
