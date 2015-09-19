@@ -195,7 +195,7 @@ public class WorkLayerAction extends BaseAction {
                             return FAILURE;    
                         }
                         if ( getStrutAction().equals("editNew") ){
-                            if ( layer == null ) {
+                            if ( layer == null ) { 
                                 if ( _name.trim().length() > 0 && _name.trim().length() < 11 ) {
                             	   char ch;
             			   for ( int i=0; i < _name.length();i++){
